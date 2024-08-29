@@ -51,7 +51,7 @@ for (pipeline in pipeline_file_list) {
 
         stage('Build') {
             steps {
-                echo 'Building the project...'
+                echo '${job_config.get_build_command()}'
             }
         }
 

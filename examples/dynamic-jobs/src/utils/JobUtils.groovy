@@ -16,4 +16,8 @@ class JobUtils {
     String get_job_name() {
         return this.job_config.job_name
     }
+
+    String get_build_command() {
+        return this.job_config.build_command
+    }
 }
