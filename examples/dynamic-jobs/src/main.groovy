@@ -1,1 +1,28 @@
-println("Hello there!!")
+@Grab("org.yaml.snakeyaml:1.17")
+import org.yaml.snakeyaml.Yaml
+import hudson.models.*
+
+// function to search for all the files ending with .yaml or .yml
+ArrayList searchYamlFiles(String dirPath) {
+    ArrayList file_list = []
+    File dir = new File(dirPath)
+    if (dir.isDirectory()) {
+        dir.eachFileRecurse { file ->
+            if (file.isFile() && (file.name.endsWith(".yaml") || file.name.endsWith(".yml"))) {
+                file_list.add(file.absolutePath)
+            }
+        }
+    } else {
+        println("Error: $dirPath is not a valid directory.")
+    }
+    return file_list
+}
+
+def cwd = hudson.models.Executor.currentExecutor().getCurrentWorkspace.absolutize()
+
+pipeline_file_list = searchYamlFiles(cwd)
+
+
+for (pipeline in pipeline_file_list) {
+    println("current pipeline: " + pipeline)
+}
