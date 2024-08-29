@@ -32,9 +32,9 @@ for (pipeline in pipeline_file_list) {
 
     JobUtils job_config = new JobUtils(pipeline)
 
-    println("job name : "+ job_config.job_name)
+    println("job name : "+ job_config.get_job_name())
 
-    job(job_config.job_name) {
+    job(job_config.get_job_name()) {
     steps {
         shell('echo Hello World!')
     }
