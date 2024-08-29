@@ -26,4 +26,9 @@ pipeline_file_list  = searchYamlFiles(cwd.toString())
 
 for (pipeline in pipeline_file_list) {
     println("current pipeline: " + pipeline)
+
+    parsed_job_config = new Yaml().load((pipeline as file).text)
+
+    println("job name : "+ parsed_job_config.job_name)
+
 }
