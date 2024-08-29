@@ -1,6 +1,6 @@
-@Grab("org.yaml.snakeyaml:1.17")
+@Grab('org.yaml.snakeyaml:1.17')
 import org.yaml.snakeyaml.Yaml
-import hudson.models.*
+import hudson.model.*
 
 // function to search for all the files ending with .yaml or .yml
 ArrayList searchYamlFiles(String dirPath) {
@@ -18,9 +18,9 @@ ArrayList searchYamlFiles(String dirPath) {
     return file_list
 }
 
-def cwd = hudson.models.Executor.currentExecutor().getCurrentWorkspace.absolutize()
+def cwd = hudson.model.Executor.currentExecutor().getCurrentWorkspace.absolutize()
 
-pipeline_file_list = searchYamlFiles(cwd)
+pipeline_file_list = searchYamlFiles(cwd.toString())
 
 
 for (pipeline in pipeline_file_list) {
