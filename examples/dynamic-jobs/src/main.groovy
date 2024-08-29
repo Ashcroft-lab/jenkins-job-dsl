@@ -1,7 +1,8 @@
-@Grab(group='org.yaml', module='snakeyaml', version='1.26')
 
-import org.yaml.snakeyaml.Yaml
 import hudson.model.*
+import utils.JobUtils
+
+
 
 // function to search for all the files ending with .yaml or .yml
 ArrayList searchYamlFiles(String dirPath) {
@@ -27,11 +28,13 @@ pipeline_file_list  = searchYamlFiles(cwd.toString())
 for (pipeline in pipeline_file_list) {
     println("current pipeline: " + pipeline)
 
-    parsed_job_config = new Yaml().load((pipeline as File).text)
+    // parsed_job_config = new Yaml().load((pipeline as File).text)
 
-    println("job name : "+ parsed_job_config.job_name)
+    JobUtils job_config = new JobUtils(pipeline)
 
-    job(parsed_job_config.job_name) {
+    println("job name : "+ job_config.job_name)
+
+    job(job_config.job_name) {
     steps {
         shell('echo Hello World!')
     }
