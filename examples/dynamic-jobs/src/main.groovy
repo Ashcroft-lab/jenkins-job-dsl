@@ -19,9 +19,9 @@ ArrayList searchYamlFiles(String dirPath) {
     return file_list
 }
 
-def cwd = hudson.model.Executor.currentExecutor().getCurrentWorkspace.absolutize()
+def cwd = hudson.model.Executor.currentExecutor().getCurrentWorkspace().absolutize()
 
-pipeline_file_list = searchYamlFiles(cwd.toString())
+pipeline_file_list  = searchYamlFiles(cwd.toString())
 
 
 for (pipeline in pipeline_file_list) {
