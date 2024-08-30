@@ -24,4 +24,8 @@ class JobUtils {
     ArrayList get_environments() {
         return this.job_config.env
     }
+
+    String get_job_type() {
+        return this.job_config.job_type
+    }
 }
