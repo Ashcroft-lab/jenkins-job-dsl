@@ -49,9 +49,9 @@ for (pipeline in pipeline_file_list) {
 
     JobUtils job_config = new JobUtils(pipeline)
     
-    dir_structure = job_config.get_dir_structure()
+    ArrayList dir_structure = job_config.get_dir_structure()
 
-    dir_prefix = create_folder_structure(dir_structure)
+    String dir_prefix = create_folder_structure(dir_structure)
 
     println("dir structure: " + dir_prefix)
 
