@@ -51,6 +51,7 @@ pipeline {
 
         stage('Build') {
             steps {
+                echo "Building"
                 echo '${job_config.get_build_command()}'
             }
         }
