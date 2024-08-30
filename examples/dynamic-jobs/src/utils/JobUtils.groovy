@@ -18,6 +18,7 @@ class JobUtils {
     ArrayList get_dir_structure() {
         ArrayList dir_list = file_path.split("/pipelines/")[1].split("/")
         dir_list.pop()
+        return dir_list
     }
 
     String get_job_name() {
