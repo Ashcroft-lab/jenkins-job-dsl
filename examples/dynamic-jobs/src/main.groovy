@@ -37,7 +37,7 @@ for (pipeline in pipeline_file_list) {
     pipelineJob(job_config.get_job_name()) {
     definition {
         cps {
-            script(readFileFromWorkspace('pipelie_script.txt'))
+            script(readFileFromWorkspace('examples/dynamic-jobs/src/pipelie_script.txt'))
             sandbox()
         }
     }
