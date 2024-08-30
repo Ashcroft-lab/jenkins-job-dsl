@@ -1,0 +1,5 @@
+build_command: "build command job1"
+job_type: kubernetes
+env:
+  - dev
+  - qa
