@@ -52,8 +52,8 @@ for (pipeline in pipeline_file_list) {
     dir_structure = job_config.get_dir_structure()
 
     dir_prefix = create_folder_structure(dir_structure)
-    
-    println("dir structure: " dir_prefix)
+
+    println("dir structure: " + dir_prefix)
 
     println("job name : "+ job_config.get_job_name())
 
