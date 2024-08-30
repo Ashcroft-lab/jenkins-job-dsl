@@ -34,9 +34,10 @@ for (pipeline in pipeline_file_list) {
 
     println("job name : "+ job_config.get_job_name())
     def env_list = job_config.get_environments()
+    println("env list"+ env_list)
 
     def dev_stage = ""
-    if ("dev" in env_list) {
+    if ("dev" in env_list){
         dev_stage = """
             stage('Deploy DEV') {
                 steps {
