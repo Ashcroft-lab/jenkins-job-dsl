@@ -98,13 +98,13 @@ for (pipeline in pipeline_file_list) {
                             }
                         }
 
-                        // dev stage
+
                         ${dev_stage}
 
-                        // QA stage
+
                         ${qa_stage}
 
-                        // prod stage
+
                         ${prod_stage}
                     }
                 }
