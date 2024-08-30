@@ -7,14 +7,18 @@ import org.yaml.snakeyaml.Yaml
 class JobUtils {
 
     def job_config
+    def file_path
 
     JobUtils(pipeline){
         def parsed_job_config = new Yaml().load((pipeline as File).text)
         this.job_config = parsed_job_config
+        this.file_path = pipeline
     }
 
     String get_job_name() {
-        return this.job_config.job_name
+        String file_name = file_path.split("/")[-1]
+        String job_name = file_name.split(".yaml")[0].split(".yml")[0]
+        return job_name
     }
 
     String get_build_command() {
