@@ -24,6 +24,19 @@ ArrayList searchYamlFiles(String dirPath) {
     return file_list
 }
 
+
+String create_folder_structure(ArrayList dir_list) {
+
+    String prev_path = ""
+    for (path in dir_list) {
+        println("creating folder: " + prev_path + path)
+        folder(prev_path+path)
+        prev_path = prev_path + path + "/"
+    }
+    return prev_path
+}
+
+
 def cwd = hudson.model.Executor.currentExecutor().getCurrentWorkspace().absolutize()
 
 pipeline_file_list  = searchYamlFiles(cwd.toString())
@@ -35,6 +48,12 @@ for (pipeline in pipeline_file_list) {
     // parsed_job_config = new Yaml().load((pipeline as File).text)
 
     JobUtils job_config = new JobUtils(pipeline)
+    
+    dir_structure = job_config.get_dir_structure()
+
+    dir_prefix = create_folder_structure(dir_structure)
+    
+    println("dir structure: " dir_prefix)
 
     println("job name : "+ job_config.get_job_name())
 

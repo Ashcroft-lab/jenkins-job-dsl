@@ -15,6 +15,11 @@ class JobUtils {
         this.file_path = pipeline
     }
 
+    ArrayList get_dir_structure() {
+        ArrayList dir_list = file_path.split("/pipelines/")[1].split("/")
+        dir_list.pop()
+    }
+
     String get_job_name() {
         String file_name = file_path.split("/")[-1]
         String job_name = file_name.split(".yaml")[0].split(".yml")[0]
