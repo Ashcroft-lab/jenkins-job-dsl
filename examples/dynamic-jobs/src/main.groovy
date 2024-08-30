@@ -43,7 +43,7 @@ pipeline_file_list  = searchYamlFiles(cwd.toString())
 
 
 for (pipeline in pipeline_file_list) {
-    println("current pipeline: " + pipeline)
+    println("Current Pipeline: " + pipeline)
 
     // parsed_job_config = new Yaml().load((pipeline as File).text)
 
@@ -53,18 +53,18 @@ for (pipeline in pipeline_file_list) {
 
     String dir_prefix = create_folder_structure(dir_structure)
 
-    println("dir structure: " + dir_prefix)
+    println("Dir structure: " + dir_prefix)
 
-    println("job name : "+ job_config.get_job_name())
+    println("Job Name: "+ job_config.get_job_name())
 
     String job_type = job_config.get_job_type()
 
     if (job_type == "kubernetes"){
-        new KubeDeployement().create(pipelineJob(job_config.get_job_name()), job_config)
+        new KubeDeployement().create(pipelineJob(dir_prefix + job_config.get_job_name()), job_config)
     }
 
     else if (job_type == "maven"){
-        new MavenDeployement().create(pipelineJob(job_config.get_job_name()), job_config)
+        new MavenDeployement().create(pipelineJob(dir_prefix + job_config.get_job_name()), job_config)
     }
 
 
