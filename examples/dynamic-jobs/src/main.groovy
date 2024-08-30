@@ -33,55 +33,82 @@ for (pipeline in pipeline_file_list) {
     JobUtils job_config = new JobUtils(pipeline)
 
     println("job name : "+ job_config.get_job_name())
+    def env_list = job_config.get_environments()
+
+    def dev_stage = ""
+    if ("dev" in env_list) {
+        dev_stage = """
+            stage('Deploy DEV') {
+                steps {
+                    echo 'Deploying the project...'
+                }
+            }
+        """
+    }
+
+    def qa_stage = ""
+    if ("qa" in env_list) {
+        qa_stage = """
+            stage('Deploy QA') {
+                steps {
+                    echo 'Deploying the project...'
+                }
+            }
+        """
+    }
+
+    def prod_stage = ""
+    if ("prod" in env_list) {
+        prod_stage = """
+            stage('Deploy PROD') {
+                steps {
+                    echo 'Deploying the project...'
+                }
+            }
+        """
+    }
+
+
 
     pipelineJob(job_config.get_job_name()) {
     definition {
         cps {
             script("""
-pipeline {
-    agent any
+                pipeline {
+                    agent any
 
-    stages {
+                    stages {
 
-        stage('Checkout') {
-            steps {
-                echo 'Checking out source code...'
-            }
-        }
+                        stage('Checkout') {
+                            steps {
+                                echo 'Checking out source code...'
+                            }
+                        }
 
-        stage('Build') {
-            steps {
-                echo "Building"
-                echo '${job_config.get_build_command()}'
-            }
-        }
+                        stage('Build') {
+                            steps {
+                                echo "Building"
+                                echo '${job_config.get_build_command()}'
+                            }
+                        }
 
-        stage('Test') {
-            steps {
-                echo 'Running tests...'
-            }
-        }
+                        stage('Test') {
+                            steps {
+                                echo 'Running tests...'
+                            }
+                        }
 
-        stage('Deploy DEV') {
-            steps {
-                echo 'Deploying the project...'
-            }
-        }
+                        // dev stage
+                        ${dev_stage}
 
-        stage('Deploy QA') {
-            steps {
-                echo 'Deploying the project...'
-            }
-        }
+                        // QA stage
+                        ${qa_stage}
 
-        stage('Deploy PROD') {
-            steps {
-                echo 'Deploying the project...'
-            }
-        }
-    }
-}
-""")
+                        // prod stage
+                        ${prod_stage}
+                    }
+                }
+            """)
             sandbox()
         }
     }
